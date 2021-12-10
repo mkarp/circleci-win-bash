@@ -1,0 +1,35 @@
+version: 2.1
+orbs:
+  win: circleci/windows@2.4.1
+executors:
+  cimg:
+    docker:
+      - image: cimg/base:stable
+jobs:
+  repro-win:
+    executor:
+      name: win/default
+      shell: bash
+    steps:
+      - checkout
+      - run: |
+          set -x
+          . hello.sh
+          echo "\\\\" | sed 's/\\\\/\\\\\\\\/g'
+          echo "\\" | sed 's/\\/\\\\/g'
+  repro-docker:
+    executor:
+      name: cimg
+    steps:
+      - checkout
+      - run: |
+          set -x
+          . hello.sh
+          echo "\\\\" | sed 's/\\\\/\\\\\\\\/g'
+          echo "\\" | sed 's/\\/\\\\/g'
+workflows:
+  version: 2
+  repro:
+    jobs:
+      - repro-win
+      - repro-docker
