@@ -10,7 +10,6 @@ backslash. This step runs equally well on both executors.
 
 Second step is an bash script inlined in the CircleCI config file, and it does
 the same thing. This step works as expected on a Docker VM, but breaks on
-Windows. It seems like every backslash should be additionally escaped in this
-case.
+Windows. It seems like every backslash is additionally escaped in this case.
 
 Contact: Misha Karpenko misha@pitch.io
